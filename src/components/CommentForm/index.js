@@ -38,7 +38,7 @@ export default class CommentForm extends Component {
                     // name = 'text'
                     value={text}
                     onChange={this.handleChange('text')}/>
-                    <inpu type = 'submit' value = 'submit'/>
+                    <input type = 'submit' value = 'submit'/>
                 </form>
         );
     }

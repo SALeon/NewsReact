@@ -4,19 +4,7 @@ import toggleOpen from '../../decorators/toggleOpen';
 import '../CommentForm/style.css'
 import CommentForm from "../CommentForm";
 
-const limits = {
-    user: {
-        min: 5,
-        max: 15
-    },
-    text: {
-        min: 20,
-        max: 50
-    }
-};
-
-
-class Index extends Component {
+class CommentList extends Component {
 
     static defaultProps = {
         comments: []
@@ -54,4 +42,4 @@ class Index extends Component {
 
 }
 
-export default toggleOpen(Index);
+export default toggleOpen(CommentList);

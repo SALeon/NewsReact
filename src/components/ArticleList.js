@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import Article from './Article';
+import Index from './Artcile/index';
 import PropTypes from 'prop-types';
 import accordion from '../decorators/accordion';
 
@@ -19,7 +19,7 @@ class ArticleList extends Component {
 
         const articleElements = articles.map((article) =>
             <li key = {article.id}>
-                <Article click = {toggleOpen} isView = {this.isVisible(article.id)} article = {article}/>
+                <Index click = {toggleOpen} isView = {this.isVisible(article.id)} article = {article}/>
             </li>);
 
 

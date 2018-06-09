@@ -1,6 +1,6 @@
 // import  React from 'react';
 //
-// export default function Article(props) {
+// export default function Index(props) {
 //     const {article} = props;
 //     return(
 //         <div>
@@ -11,11 +11,11 @@
 // }
 
 import React, {Component} from 'react';
-import CommentList from './CommenList/index';
+import CommentList from '../CommenList/index';
 import PropTypes from 'prop-types';
-import accordion from "../decorators/accordion";
+import { CSSTransitionGroup } from 'react-transition-group'
 
-class Article extends Component {
+class Index extends Component {
     static propTypes = {
         article: PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -30,12 +30,19 @@ class Article extends Component {
         return (
             <div>
                 <h3>{article.title}</h3>
-                <button
-                    onClick = {click(article.id)}
-                   >
-                    { isView ? 'close' : 'open'}
+                <button onClick={click(article.id)}>
+                    {isView ? 'close' : 'open'}
                 </button>
-                {this.getBody()}
+                <CSSTransitionGroup
+                    transitionName = 'article'
+                    transitionAppear
+                    transitionEnterTimeout = {300}
+                    transitionLeaveTimeout = {500}
+                    transitionAppearTimeout = {500}
+                    component = 'div'
+                >
+                    {this.getBody()}
+                </CSSTransitionGroup>
             </div>
         )
     }
@@ -45,10 +52,10 @@ class Article extends Component {
         const {article} = this.props;
         // console.log(article.comment);
         return <section>
-                    {article.text}
-                    <CommentList comments = {article.comments}/>
-               </section>;
+            {article.text}
+            <CommentList comments={article.comments}/>
+        </section>;
     }
 }
 
-export default Article;
+export default Index;
