@@ -12,7 +12,8 @@ export default class DataRange extends Component {
     render() {
         const {from, to, enteredTo} = this.state;
         const selectedRange = from && to && `${from.toDateString()} ${to.toDateString()}`;
-        return (<div className='data-range'>
+        return (
+            <div className='data-range'>
                 <DayPicker
                     // ref='daypicker'
                     selectedDays={day => DateUtils.isDayInRange(day, {from, to})}

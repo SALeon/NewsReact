@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Comment from '../Comment';
 import toggleOpen from '../../decorators/toggleOpen';
-import './style.css'
+import '../CommentForm/style.css'
+import CommentForm from "../CommentForm";
 
 const limits = {
     user: {
@@ -21,38 +22,15 @@ class Index extends Component {
         comments: []
     };
 
-    state = {
-        user: 'set user name',
-        text: 'set comment text',
-    };
-
-
     render() {
         const {isOpen, toggleOpen} = this.props;
-        const {user, text} = this.state;
         return (
             <div>
                 <button onClick={toggleOpen}>
                     {isOpen ? 'Hide comment' : 'View comment'}
                 </button>
                 {this.getBody()}
-                <form>
-                    <label>
-                        Add comment:
-                        <label>User: <input
-                            className = {this.getClassName('user')}
-                            name = 'user'
-                            value = {user}
-                            onChange = {this.handleChange}/>
-                        </label>
-                        <label>Text: <textarea
-                            className = {this.getClassName('text')}
-                            name = 'text'
-                            value = {text}
-                            onChange = {this.handleChange}/>
-                        </label>
-                    </label>
-                </form>
+                <CommentForm/>
             </div>
         );
     }
@@ -64,7 +42,7 @@ class Index extends Component {
         if (!comments.length) return <p>No comments yet</p>;
 
         const commentList = comments.map((comment) =>
-            <li key={comment.id}>
+            <li key = {comment.id}>
                 <Comment comment={comment}/>
             </li>);
         return (
@@ -74,18 +52,6 @@ class Index extends Component {
         )
     }
 
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    };
-
-    getClassName(type) {
-
-        return this.state[type].length < limits[type].min
-            || this.state[type].length > limits[type].max
-            ? 'form-input__error' : '';
-    }
 }
 
 export default toggleOpen(Index);

@@ -10,8 +10,8 @@ export default class App extends Component {
 
         return (
             <div>
-                <Filters/>
-                <ArticleList articles={articles}/>
+                <Filters articles = {articles}/>
+                <ArticleList articles = {articles} defaultOpenId = {articles[0].id}/>
             </div>
         )
     }
