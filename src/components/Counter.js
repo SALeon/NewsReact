@@ -24,17 +24,6 @@ class Counter extends Component {
     };
 }
 
-function mapStateToProps(state) {
-    return {
+export default connect(state => ({
         counter: state.count
-    }
-}
-//second parameter inside connect is object with AC witch connect to "store.dispatch" method
-const mapToDispatch = {increment};
-
-//connect has inside method "dispatch"
-//first parameter object store, second parameter object to dispatch
-const decorator = connect(mapStateToProps, mapToDispatch);
-
-// export default Counter;
-export default decorator(Counter);
+}), { increment })(Counter);
