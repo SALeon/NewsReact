@@ -20,7 +20,7 @@ class Counter extends Component {
     }
 
     handleIncrement = () => {
-        this.props.dispatchIncrement();
+        this.props.increment();
     };
 }
 
@@ -30,9 +30,7 @@ function mapStateToProps(state) {
     }
 }
 //second parameter inside connect is object with AC witch connect to "store.dispatch" method
-const mapToDispatch = {
-  dispatchIncrement: increment
-};
+const mapToDispatch = {increment};
 
 //connect has inside method "dispatch"
 //first parameter object store, second parameter object to dispatch
