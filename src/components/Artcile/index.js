@@ -13,7 +13,10 @@
 import React, {Component} from 'react';
 import CommentList from '../CommenList/index';
 import PropTypes from 'prop-types';
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group';
+import './style.css';
+import {deleteArticle} from '../../AC';
+import {connect} from 'react-redux';
 
 class Article extends Component {
     static propTypes = {
@@ -33,6 +36,7 @@ class Article extends Component {
                 <button onClick={click(article.id)}>
                     {isView ? 'close' : 'open'}
                 </button>
+                <button onClick = {this.handleDelete}>delete me</button>
                 <CSSTransitionGroup
                     transitionName = 'article'
                     transitionAppear
@@ -56,6 +60,11 @@ class Article extends Component {
             <CommentList comments={article.comments}/>
         </section>;
     }
+
+    handleDelete = () => {
+        const {deleteArticle, article} = this.props;
+        deleteArticle(article.id);
+    }
 }
 
-export default Article;
+export default connect(null, { deleteArticle })(Article);

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ArticleList from '../components/ArticleList';
-import {articles} from "../fixtures";
 import Filters from './Filters';
 import Counter from './Counter';
 
@@ -10,9 +9,9 @@ export default class App extends Component {
 
         return (
             <div>
-                <Counter />
-                <Filters articles = {articles}/>
-                <ArticleList articles = {articles} defaultOpenId = {articles[0].id}/>
+                <Counter/>
+                <Filters articles = {[]}/>
+                <ArticleList/>
             </div>
         )
     }
