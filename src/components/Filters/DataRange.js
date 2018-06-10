@@ -15,7 +15,7 @@ export default class DataRange extends Component {
         return (
             <div className='data-range'>
                 <DayPicker
-                    // ref='daypicker'
+                    ref='daypicker'
                     selectedDays={day => DateUtils.isDayInRange(day, {from, to})}
                     onDayClick={this.handleDayClick}
                 />

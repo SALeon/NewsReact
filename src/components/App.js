@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ArticleList from '../components/ArticleList';
 import {articles} from "../fixtures";
 import Filters from './Filters';
-import 'react-day-picker/lib/style.css';
+import Counter from './Counter';
 
 export default class App extends Component {
 
@@ -10,6 +10,7 @@ export default class App extends Component {
 
         return (
             <div>
+                <Counter />
                 <Filters articles = {articles}/>
                 <ArticleList articles = {articles} defaultOpenId = {articles[0].id}/>
             </div>

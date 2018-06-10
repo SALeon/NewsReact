@@ -15,7 +15,6 @@ export default (Origin) => class Accordion extends Component{
     }
 
     toggleOpen = (id) =>         (ev) => {
-            console.log(this);
             ev && ev.preventDefault && ev.preventDefault();
 
             if (id === this.state.openItem) {
