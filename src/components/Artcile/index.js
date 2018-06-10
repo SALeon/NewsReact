@@ -15,7 +15,7 @@ import CommentList from '../CommenList/index';
 import PropTypes from 'prop-types';
 import { CSSTransitionGroup } from 'react-transition-group'
 
-class Index extends Component {
+class Article extends Component {
     static propTypes = {
         article: PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -58,4 +58,4 @@ class Index extends Component {
     }
 }
 
-export default Index;
+export default Article;

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 export default class Filters extends Component {
     static propTypes={
-
+        articles: PropTypes.array.isRequired
     };
 
     render() {

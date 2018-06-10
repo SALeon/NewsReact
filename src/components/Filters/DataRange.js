@@ -10,7 +10,7 @@ export default class DataRange extends Component {
     };
 
     render() {
-        const {from, to, enteredTo} = this.state;
+        const {from, to} = this.state;
         const selectedRange = from && to && `${from.toDateString()} ${to.toDateString()}`;
         return (
             <div className='data-range'>
