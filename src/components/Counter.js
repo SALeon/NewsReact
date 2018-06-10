@@ -12,14 +12,16 @@ class Counter extends Component {
             <div>
                 <h2>
                     {this.props.counter}
-                    <button onClick={this.handleIncrement}>Increment me</button>
                 </h2>
+                <button onClick={this.handleIncrement}>Increment me</button>
             </div>
         );
     }
 
     handleIncrement = () => {
-
+        this.props.dispatch({
+            type: 'INCREMENT'
+        })
     };
 }
 
@@ -29,6 +31,8 @@ function mapStateToProps(state) {
     }
 }
 
+//connect has inside method "dispatch"
 const decorator = connect(mapStateToProps);
 
+// export default Counter;
 export default decorator(Counter);
