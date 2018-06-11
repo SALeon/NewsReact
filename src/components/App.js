@@ -10,7 +10,7 @@ export default class App extends Component {
         return (
             <div>
                 <Counter/>
-                <Filters articles = {[]}/>
+                <Filters />
                 <ArticleList/>
             </div>
         )

@@ -1,5 +1,5 @@
 import {articles as defaultArticles} from '../fixtures';
-import {DELETE_ARTICLE} from '../constants';
+import {DELETE_ARTICLE, FILTER_DATE_RANGE} from '../constants';
 
 
 export default (articleState = defaultArticles, action) => {
@@ -8,8 +8,8 @@ export default (articleState = defaultArticles, action) => {
     switch (type) {
 
         case DELETE_ARTICLE:
-            console.log(payload);
-            return articleState.filter(article => article.id !== payload.id)
+            return articleState.filter(article => article.id !== payload.id);
+
     }
 
     return articleState;

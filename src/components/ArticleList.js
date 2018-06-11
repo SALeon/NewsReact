@@ -3,6 +3,8 @@ import Index from './Artcile/index';
 import PropTypes from 'prop-types';
 import accordion from '../decorators/accordion';
 import {connect} from 'react-redux';
+import {articles as defaultArticles} from "../fixtures";
+import {FILTER_DATE_RANGE} from "../constants";
 
 class ArticleList extends Component {
    static propTypes = {
@@ -41,6 +43,15 @@ class ArticleList extends Component {
 //     articles: PropTypes.array.isRequired
 // };
 
-export default connect(state => ({
-    articles: state.articles
-}))(accordion(ArticleList));
+export default connect(({articles, filters}) => {
+    const {selected, dateRange: {from, to}} = filters;
+
+    const filteredArticles = articles.filter(article => {
+        const published = Date.parse(article.date);
+        return (!selected.length || selected.includes(article.id))
+            && (!from || !to || (published > from && published < to))
+    });
+
+    return {articles: filteredArticles}
+
+})(accordion(ArticleList));

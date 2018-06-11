@@ -1,23 +1,31 @@
 import React, {Component} from 'react';
 import DayPicker, {DateUtils} from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import {connect} from "react-redux";
+import {changedRange} from '../../AC';
+import PropTypes from 'prop-types';
 
-export default class DataRange extends Component {
+class DataRange extends Component {
 
-    state = {
-        from: null,
-        to: null,
+    static propTypes = {
+        //from store
+        range: PropTypes.shape(
+            {
+                from: PropTypes.object,
+                to: PropTypes.object
+            }
+        )
     };
 
     render() {
-        const {from, to} = this.state;
+        const {from, to} = this.props.range;
         const selectedRange = from && to && `${from.toDateString()} ${to.toDateString()}`;
         return (
             <div className='data-range'>
                 <DayPicker
                     ref='daypicker'
-                    selectedDays={day => DateUtils.isDayInRange(day, {from, to})}
-                    onDayClick={this.handleDayClick}
+                    selectedDays = {day => DateUtils.isDayInRange(day, {from, to})}
+                    onDayClick = {this.handleDayClick}
                 />
                 {selectedRange}
             </div>
@@ -25,7 +33,13 @@ export default class DataRange extends Component {
     }
 
     handleDayClick = (day) => {
-        this.setState(DateUtils.addDayToRange(day, this.state));
+
+        const {changedRange, range} = this.props;
+        changedRange(DateUtils.addDayToRange(day, range));
     }
 
 }
+
+export default connect(state => ({
+    range: state.filters.dateRange
+}), {changedRange})(DataRange);
