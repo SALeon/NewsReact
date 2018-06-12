@@ -1,5 +1,5 @@
-import {articles as defaultArticles} from '../fixtures';
-import {DELETE_ARTICLE, FILTER_DATE_RANGE} from '../constants';
+import {normalizedArticles as defaultArticles} from '../fixtures';
+import {DELETE_ARTICLE} from '../constants';
 
 
 export default (articleState = defaultArticles, action) => {
@@ -14,4 +14,3 @@ export default (articleState = defaultArticles, action) => {
 
     return articleState;
 }
-

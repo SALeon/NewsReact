@@ -13,6 +13,7 @@ export default (filters = defaultFilter, action) => {
     const {payload, type} = action;
 
     switch (type) {
+
         case FILTER_DATE_RANGE:
             return {...filters, dateRange: payload.range};
 
@@ -22,5 +23,5 @@ export default (filters = defaultFilter, action) => {
         case DELETE_ARTICLE:
             return {...filters, selected: filters.selected.filter(id => id !== payload.id)}
     }
-    return filters;
+    return filters; 
 }

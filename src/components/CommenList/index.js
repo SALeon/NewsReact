@@ -29,9 +29,9 @@ class CommentList extends Component {
         const {comments} = this.props;
         if (!comments.length) return <p>No comments yet</p>;
 
-        const commentList = comments.map((comment) =>
-            <li key = {comment.id}>
-                <Comment comment={comment}/>
+        const commentList = comments.map((id) =>
+            <li key = {id}>
+                <Comment id={id}/>
             </li>);
         return (
             <ul>
