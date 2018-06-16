@@ -1,5 +1,6 @@
 export default store => next => action => {
-    //state before action implement
-    next(action)
-    // state after action implement
+    console.log('---', 'state before: ', store.getState());
+    console.log('---', 'dispatching', action);
+    next(action);
+    console.log('---', 'state after: ', store.getState());
 }
