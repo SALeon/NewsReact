@@ -1,4 +1,4 @@
-import {DELETE_ARTICLE, FILTER_DATE_RANGE, FILTER_DATE_SELECT} from "../constants";
+import {DELETE_ARTICLE, FILTER_DATE_RANGE, FILTER_SELECT} from "../constants";
 
 const defaultFilter = {
     dateRange:
@@ -17,11 +17,12 @@ export default (filters = defaultFilter, action) => {
         case FILTER_DATE_RANGE:
             return {...filters, dateRange: payload.range};
 
-        case FILTER_DATE_SELECT:
+        case FILTER_SELECT:
             return {...filters, selected: payload.selected};
 
         case DELETE_ARTICLE:
             return {...filters, selected: filters.selected.filter(id => id !== payload.id)}
     }
+
     return filters; 
 }

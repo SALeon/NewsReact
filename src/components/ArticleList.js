@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import Index from './Artcile/index';
+import Article from './Artcile';
 import PropTypes from 'prop-types';
 import accordion from '../decorators/accordion';
 import {connect} from 'react-redux';
@@ -19,7 +19,7 @@ class ArticleList extends Component {
 
         const articleElements = articles.map((article) =>
             <li key = {article.id}>
-                <Index click = {toggleOpen} isView = {this.isVisible(article.id)} article = {article}/>
+                <Article click = {toggleOpen} isView = {this.isVisible(article)} article = {article}/>
             </li>);
 
 
