@@ -3,22 +3,35 @@ import Comment from '../Comment';
 import toggleOpen from '../../decorators/toggleOpen';
 import '../CommentForm/style.css'
 import CommentForm from "../CommentForm";
+import PropTypes from 'prop-types';
+import {setComment} from "../../AC";
+import {connect} from "react-redux";
+import comments from "../../reducer/comments";
 
 class CommentList extends Component {
+
+    static propTypes = {
+        // from props
+        articleId: PropTypes.string.isRequired,
+
+        // from connect
+        comments: PropTypes.array,
+        setComment: PropTypes.func.isRequired
+    };
 
     static defaultProps = {
         comments: []
     };
 
     render() {
-        const {isOpen, toggleOpen} = this.props;
+        const {isOpen, toggleOpen, articleId} = this.props;
         return (
             <div>
                 <button onClick={toggleOpen}>
                     {isOpen ? 'Hide comment' : 'View comment'}
                 </button>
                 {this.getBody()}
-                <CommentForm/>
+                <CommentForm addComment = {this.addComment(articleId)}/>
             </div>
         );
     }
@@ -29,9 +42,9 @@ class CommentList extends Component {
         const {comments} = this.props;
         if (!comments.length) return <p>No comments yet</p>;
 
-        const commentList = comments.map((id) =>
-            <li key = {id}>
-                <Comment id={id}/>
+        const commentList = comments.map((comment) =>
+            <li key = {comment.id}>
+                <Comment id = {comment.id}/>
             </li>);
         return (
             <ul>
@@ -40,6 +53,11 @@ class CommentList extends Component {
         )
     }
 
+    addComment = (articleId) => (user, text) => {
+        this.props.setComment(user, text, articleId);
+    }
+
 }
 
-export default toggleOpen(CommentList);
+export default connect( ({comments}) => ({comments: Object.values(comments)})
+    , {setComment})(toggleOpen(CommentList));

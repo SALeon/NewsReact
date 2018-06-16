@@ -1,25 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {commentSelectorFactory} from "../selectors";
 
-function Comment({comment}){
+class Comment extends Component {
+
+    static propTypes = {
+        id: PropTypes.string.isRequired,
+        //from connect
+        comment: PropTypes.shape({
+            text: PropTypes.string.isRequired,
+            user: PropTypes.string.isRequired
+        }).isRequired
+    };
+
+    render() {
+        const {comment} = this.props;
         return (
             <section>
                 <h4>{comment.user}</h4>
-                  {comment.text}
+                {comment.text}
             </section>
         );
+    }
 }
 
-Comment.propTypes = {
-    id: PropTypes.string.isRequired,
-    //from connect
-    comment: PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        user: PropTypes.string.isRequired
-    }).isRequired
-};
 
 const mapStateToProps = () => {
     const commentSelector = commentSelectorFactory();// add each selector in closure

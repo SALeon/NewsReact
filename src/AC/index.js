@@ -1,4 +1,4 @@
-import {DELETE_ARTICLE, INCREMENT, FILTER_DATE_RANGE, FILTER_SELECT} from '../constants';
+import {DELETE_ARTICLE, INCREMENT, FILTER_DATE_RANGE, SET_COMMENT, FILTER_SELECT} from '../constants';
 
 export function increment() {
     return {
@@ -23,6 +23,14 @@ export function changedRange(range) {
 export function changedSelected(selected) {
     return {
         type: FILTER_SELECT,
-        payload: {selected}
+        payload: {selected},
+    }
+}
+
+export function setComment(user, text, id){
+    return {
+        type: SET_COMMENT,
+        payload: {user, text, id},
+        generateId: true
     }
 }

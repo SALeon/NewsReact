@@ -14,17 +14,17 @@ export default (Origin) => class Accordion extends Component{
         return <Origin { ... this.props } { ...this.state }  toggleOpen = {this.toggleOpen}/>
     }
 
-    toggleOpen = (id) =>         (ev) => {
-            ev && ev.preventDefault && ev.preventDefault();
+    toggleOpen = (id) => (ev) => {
+        ev && ev.preventDefault && ev.preventDefault();
 
-            if (id === this.state.openItem) {
-                this.setState({
-                    openItem: null
-                });
-            } else {
-                this.setState({
-                    openItem: id
-                });
-            }
+        if (id === this.state.openItem) {
+            this.setState({
+                openItem: null
+            });
+        } else {
+            this.setState({
+                openItem: id
+            });
         }
+    }
 }

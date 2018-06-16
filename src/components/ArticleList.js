@@ -15,11 +15,11 @@ class ArticleList extends Component {
    };
 
     render() {
-        const {toggleOpen, articles} = this.props;
+        const {toggleOpen, articles, lalala} = this.props;
 
-        const articleElements = articles.map((article) =>
+        const articleElements = articles. map((article) =>
             <li key = {article.id}>
-                <Article click = {toggleOpen} isView = {this.isVisible(article)} article = {article}/>
+                <Article click = {toggleOpen} isView = {this.isVisible(article.id)} article = {article}/>
             </li>);
 
 

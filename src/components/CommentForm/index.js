@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import './style.css'
+import './style.css';
+import PropTypes from 'prop-types';
 
 const limits = {
     user: {
@@ -13,7 +14,15 @@ const limits = {
 };
 
 
+const DEFAULT_USER_TEXT = 'set user name';
+const DEFAULT_COMMENT_TEXT = 'set comment text';
+
 export default class CommentForm extends Component {
+
+    static propTypes = {
+        // from props
+        addComment: PropTypes.func.isRequired
+    };
 
     static defaultProps = {
         comments: []
@@ -46,11 +55,19 @@ export default class CommentForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.setState({
-            user: 'set user name',
-            text: 'set comment text',
-        });
+
+        const {user, text} = this.state;
+
+        if (user !== DEFAULT_USER_TEXT && text !== DEFAULT_COMMENT_TEXT) {
+            this.props.addComment(user, text);
+
+            this.setState({
+                              user: DEFAULT_USER_TEXT,
+                              text: DEFAULT_COMMENT_TEXT,
+                          });
+        }
     };
+
 
     handleChange = type => event => {
         const {value} = event.target;

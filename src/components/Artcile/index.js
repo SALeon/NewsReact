@@ -57,7 +57,7 @@ class Article extends Component {
         // console.log(article.comment);
         return <section>
             {article.text}
-            <CommentList comments={article.comments}/>
+            <CommentList articleId = {article.id}/>
         </section>;
     }
 
