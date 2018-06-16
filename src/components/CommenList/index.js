@@ -6,7 +6,6 @@ import CommentForm from "../CommentForm";
 import PropTypes from 'prop-types';
 import {setComment} from "../../AC";
 import {connect} from "react-redux";
-import comments from "../../reducer/comments";
 
 class CommentList extends Component {
 
