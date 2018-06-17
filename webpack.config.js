@@ -7,10 +7,13 @@ const htmlPlugin = new HtmlWebpackPlugin({
 
 module.exports = {
     devtool: 'source-map',
-    entry: [
-        './src/index.js'
-    ],
-
+    entry: ['./src/index.js'],
+    devServer: {
+        proxy: [{
+            path: '/api/',
+            target: 'http://localhost:3001'
+        }],
+    },
     module: {
         rules: [
             {

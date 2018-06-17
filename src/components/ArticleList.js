@@ -3,7 +3,8 @@ import Article from './Artcile';
 import PropTypes from 'prop-types';
 import accordion from '../decorators/accordion';
 import {connect} from 'react-redux';
-import {filtratedArticlesSelector} from '../selectors'
+import {filtratedArticlesSelector} from '../selectors';
+import {loadAllArticles} from '../AC';
 
 class ArticleList extends Component {
    static propTypes = {
@@ -13,6 +14,10 @@ class ArticleList extends Component {
        //from toggleOpen decorator
        toggleOpen: PropTypes.func.isRequired
    };
+
+   componentDidMount(){
+       this.props.loadAllArticles();
+   }
 
     render() {
         const {toggleOpen, articles} = this.props;
@@ -43,8 +48,6 @@ class ArticleList extends Component {
 //     articles: PropTypes.array.isRequired
 // };
 
-export default connect((state) => {
-    return {
-        articles: filtratedArticlesSelector(state),
-    }
-})(accordion(ArticleList));
+export default connect((state) => ({
+    articles: filtratedArticlesSelector(state),
+}), {loadAllArticles})(accordion(ArticleList));

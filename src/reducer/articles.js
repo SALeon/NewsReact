@@ -1,9 +1,9 @@
 import {normalizedArticles as defaultArticles} from '../fixtures';
-import {DELETE_ARTICLE, ADD_COMMENT} from '../constants';
-import {arrToMap} from "../helpers";
+import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES} from '../constants';
+import { arrToMap, mapToArr } from "../helpers";
 
-export default (articleState = arrToMap(defaultArticles), action) => {
-    const {type, payload, generateId} = action;
+export default (articleState = {}, action) => {
+    const {type, payload, generateId, response} = action;
 
     switch (type) {
 
@@ -21,6 +21,9 @@ export default (articleState = arrToMap(defaultArticles), action) => {
                     comments: (article.comments || []).concat(generateId)
                 }
             };
+
+        case LOAD_ALL_ARTICLES:
+            return mapToArr(response);
     }
     return articleState;
 }
