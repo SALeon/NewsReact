@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import {mapToArr} from "../helpers";
 
 const filtersGetter = state => state.filters;
-const articlesGetter = state => state.articles;
+const articlesGetter = state => state.articles.entities;
 const commentGetter = state => state.comments;
 const idGetter = (state, props) => props.id;
 

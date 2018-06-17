@@ -36,5 +36,5 @@ class SelectFilter extends Component {
 
 export default connect( ({articles, filters: {selected} }) => ({
     selected,
-    articles: mapToArr(articles)
+    articles: mapToArr(articles.entities)
 }),{changedSelected})(SelectFilter);
