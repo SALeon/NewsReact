@@ -30,7 +30,7 @@ class CommentList extends Component {
                     {isOpen ? 'Hide comment' : 'View comment'}
                 </button>
                 {this.getBody()}
-                <CommentForm addComment = {this.addComment(articleId)}/>
+                <CommentForm addComment = {this. addComment(articleId)}/>
             </div>
         );
     }
@@ -52,8 +52,8 @@ class CommentList extends Component {
         )
     }
 
-    addComment = (articleId) => (user, text) => {
-        this.props.setComment(user, text, articleId);
+    addComment = (articleId) => (comment) => {
+        this.props.setComment(comment, articleId);
     }
 
 }

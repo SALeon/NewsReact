@@ -59,7 +59,7 @@ export default class CommentForm extends Component {
         const {user, text} = this.state;
 
         if (user !== DEFAULT_USER_TEXT && text !== DEFAULT_COMMENT_TEXT) {
-            this.props.addComment(user, text);
+            this.props.addComment({user, text});
 
             this.setState({
                               user: DEFAULT_USER_TEXT,

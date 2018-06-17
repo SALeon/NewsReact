@@ -5,7 +5,7 @@ export default store => next => action => {
     }
 
     next({
-            ... action,
-            generateId: (Math.random() + Date.now()).toString()
-        })
+             ...action,
+             generateId: (Math.random() + Date.now()).toString()
+         })
 }

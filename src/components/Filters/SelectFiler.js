@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import 'react-select/dist/react-select.css';
 import {connect} from "react-redux";
 import {changedSelected} from "../../AC";
+import {mapToArr} from "../../helpers";
 
 class SelectFilter extends Component {
     static propTypes = {
@@ -35,5 +36,5 @@ class SelectFilter extends Component {
 
 export default connect( ({articles, filters: {selected} }) => ({
     selected,
-    articles: Object.values(articles)
+    articles: mapToArr(articles)
 }),{changedSelected})(SelectFilter);

@@ -15,13 +15,14 @@ class ArticleList extends Component {
    };
 
     render() {
-        const {toggleOpen, articles, lalala} = this.props;
-
+        const {toggleOpen, articles} = this.props;
         const articleElements = articles. map((article) =>
             <li key = {article.id}>
-                <Article click = {toggleOpen} isView = {this.isVisible(article.id)} article = {article}/>
+                <Article
+                    click = {toggleOpen}
+                    isView = {this.isVisible(article.id)}
+                    article = {article}/>
             </li>);
-
 
         return (<div>
                 <ul>

@@ -54,7 +54,6 @@ class Article extends Component {
     getBody() {
         if (!this.props.isView) return null;
         const {article} = this.props;
-        // console.log(article.comment);
         return <section>
             {article.text}
             <CommentList articleId = {article.id}/>
