@@ -22,6 +22,7 @@ class ArticleList extends Component {
     render() {
         const {toggleOpen, articles} = this.props;
         const articleElements = articles. map((article) =>
+
             <li key = {article.id}>
                 <Article
                     click = {toggleOpen}
