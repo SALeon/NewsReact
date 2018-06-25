@@ -15,7 +15,8 @@ import CommentList from '../CommenList/index';
 import PropTypes from 'prop-types';
 import { CSSTransitionGroup } from 'react-transition-group';
 import './style.css';
-import {deleteArticle} from '../../AC';
+import {deleteArticle, loadArticle} from '../../AC';
+import Loader from '../Loader';
 import {connect} from 'react-redux';
 
 class Article extends Component {
@@ -51,13 +52,22 @@ class Article extends Component {
         )
     }
 
-    getBody() {
-        if (!this.props.isView) return null;
-        const {article} = this.props;
-        return <section>
-            {article.text}
-            <CommentList articleId = {article.id}/>
-        </section>;
+    componentWillReceiveProps({isView, loadArticle, article}) {
+        if (isView && !article.text && !article.loading) {
+            loadArticle(article.id);
+        }
+    }
+
+    getBody () {
+        const {article, isView} = this.props;
+        if (!isView) return null;
+        if (article.loading) {
+            return <Loader/>
+        }
+            return <section>
+                {article.text}
+                <CommentList articleId={article.id}/>
+            </section>;
     }
 
     handleDelete = () => {
@@ -66,4 +76,4 @@ class Article extends Component {
     }
 }
 
-export default connect(null, { deleteArticle })(Article);
+export default connect(null, {deleteArticle, loadArticle})(Article);

@@ -1,4 +1,12 @@
-import {DELETE_ARTICLE, INCREMENT, FILTER_DATE_RANGE, ADD_COMMENT, FILTER_SELECT, LOAD_ALL_ARTICLES} from '../constants';
+import {
+    DELETE_ARTICLE,
+    INCREMENT,
+    FILTER_DATE_RANGE,
+    ADD_COMMENT,
+    FILTER_SELECT,
+    LOAD_ALL_ARTICLES,
+    LOAD_ARTICLE, START, FAIL, SUCCESS, LOAD_COMMENTS
+} from '../constants';
 
 export function increment() {
     return {
@@ -41,3 +49,41 @@ export function loadAllArticles () {
         callAPI: '/api/article'
     }
 }
+
+export function loadArticle (id) {
+    return (dispatch) => {
+        dispatch({
+            type: LOAD_ARTICLE + START,
+            payload: {id}
+        });
+
+        fetch(`/api/article/${id}`)
+            .then(res => res.json())
+            .then(response => dispatch({
+                type: LOAD_ARTICLE + SUCCESS,
+                payload: {id, response}
+            }))
+            .catch(error => dispatch({
+                type: LOAD_ARTICLE + FAIL,
+                payload: {id, error}
+            }))
+    }
+}
+
+export function loadCommits (...ids) {
+    return (dispatch) => {
+        dispatch ({
+            type: LOAD_COMMENTS + START,
+            payload: {ids}
+        });
+
+        fetch(`/api/comment?articles= `)
+    }
+}
+
+// export function loadArticle(id) {
+//     return{
+//         type: LOAD_ARTICLE,
+//         callAPI: '/api/article/${id}'
+//     }
+// }
