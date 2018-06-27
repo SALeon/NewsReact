@@ -18,17 +18,19 @@ const ReducerState = Record({
 const defaultState = new ReducerState();
 
 export default (comments = defaultState, action) => {
-    const {type, payload, generateId} = action;
+    const {type, payload, generateId, response} = action;
 
     switch (type) {
 
         case LOAD_COMMENTS + START:
-            console.log('load_comments start.....')
+
             return ;
 
         case LOAD_COMMENTS + SUCCESS:
-            console.log('load_comments success.....')
-            return ;
+            return comments
+                .set('entities', arrToMap(response, CommentRecord))
+                .set('loading', false)
+                .set('loaded', true);
 
         case ADD_COMMENT:
             return {

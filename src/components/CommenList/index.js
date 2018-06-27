@@ -49,7 +49,9 @@ class CommentList extends Component {
     }
 
     getBody() {
-        if (!this.props.isOpen) return null;
+        const {isOpen, loading} = this.props;
+
+        if (!isOpen || ) return null;
 
         const {comments} = this.props;
         if (!comments.length) return <p>No comments yet</p>;
