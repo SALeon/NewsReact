@@ -18,7 +18,7 @@ class ArticleList extends Component {
        toggleOpen: PropTypes.func.isRequired
    };
 
-   componentDidMount(){
+   componentDidMount() {
        const {loaded, loading, loadAllArticles} = this.props;
       if (!loaded || !loading) {
           loadAllArticles();
