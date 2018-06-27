@@ -23,8 +23,8 @@ export default (comments = defaultState, action) => {
     switch (type) {
 
         case LOAD_COMMENTS + START:
-
-            return ;
+            return comments
+                .set('loading', true);
 
         case LOAD_COMMENTS + SUCCESS:
             return comments
