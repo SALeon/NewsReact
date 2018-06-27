@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import {setComment, loadCommits} from "../../AC";
 import {connect} from "react-redux";
 import Loader from "../Loader";
+import {mapToArr} from "../../helpers";
 
 class CommentList extends Component {
 
@@ -16,6 +17,8 @@ class CommentList extends Component {
 
         // from connect
         comments: PropTypes.array,
+        loading: PropTypes.bool.isRequired,
+        loaded: PropTypes.bool.isRequired,
         setComment: PropTypes.func.isRequired,
         loadCommits: PropTypes.func.isRequired
     };
@@ -71,5 +74,10 @@ class CommentList extends Component {
 
 }
 
-export default connect( ({comments}) => ({comments: Object.values(comments)})
+export default connect(({comments}) =>
+        ({
+            comments: mapToArr(comments.entities),
+            loaded: comments.loaded,
+            loading: comments.loading
+        })
     , {setComment, loadCommits})(toggleOpen(CommentList));
