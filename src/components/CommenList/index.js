@@ -28,9 +28,9 @@ class CommentList extends Component {
     };
 
     componentDidMount() {
-        const {loaded, loading, loadCommits} = this.props;
+        const {loaded, loading, loadCommits, articleId} = this.props;
         if (!loaded || !loading) {
-            loadCommits();
+            loadCommits(articleId);
         }
     }
 

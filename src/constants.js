@@ -10,6 +10,6 @@ export const FILTER_SELECT = 'FILTER_SELECT';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const LOAD_COMMENTS = 'LOAD_COMMENTS';
 
-export const START = 'START';
-export const SUCCESS = 'SUCCESS';
+export const START = '_START';
+export const SUCCESS = '_SUCCESS';
 export const FAIL = '_FAIL';
