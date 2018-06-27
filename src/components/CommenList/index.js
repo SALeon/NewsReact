@@ -24,9 +24,9 @@ class CommentList extends Component {
         comments: []
     };
 
-    componentDidMount(){
+    componentDidMount() {
         const {loaded, loading, loadCommits} = this.props;
-        if (loading || !loaded) {
+        if (!loaded || !loading) {
             loadCommits();
         }
     }
@@ -49,17 +49,15 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {isOpen, loading} = this.props;
-
-        if (!isOpen || ) return null;
-
-        const {comments} = this.props;
-        if (!comments.length) return <p>No comments yet</p>;
+        const {isOpen, loading, comments} = this.props;
+        if (!isOpen) return null;
+        if (loading) return <Loader/>;
 
         const commentList = comments.map((comment) =>
             <li key = {comment.id}>
                 <Comment id = {comment.id}/>
             </li>);
+
         return (
             <ul>
                 {commentList}
