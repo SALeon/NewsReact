@@ -84,7 +84,7 @@ export function loadCommits (article) {
                 payload: {article, response}
             }))
             .catch(error => dispatch({
-                type: LOAD_ARTICLE + FAIL,
+                type: LOAD_COMMENTS + FAIL,
                 payload: {article, error}
             }))
     }
