@@ -70,18 +70,22 @@ export function loadArticle (id) {
     }
 }
 
-export function loadCommits (articleId) {
+export function loadCommits (article) {
     return (dispatch) => {
         dispatch({
             type: LOAD_COMMENTS + START,
-            payload: {id: articleId}
+            payload: {article}
         });
 
-        fetch(`/api/comment?article=${articleId}`)
+        fetch(`/api/comment?article=${article}`)
             .then(res => res.json())
             .then(response => dispatch({
                 type: LOAD_COMMENTS + SUCCESS,
-                payload: {id: articleId, response}
+                payload: {article, response}
+            }))
+            .catch(error => dispatch({
+                type: LOAD_ARTICLE + FAIL,
+                payload: {article, error}
             }))
     }
 }

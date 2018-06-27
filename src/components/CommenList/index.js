@@ -6,6 +6,7 @@ import CommentForm from "../CommentForm";
 import PropTypes from 'prop-types';
 import {setComment, loadCommits} from "../../AC";
 import {connect} from "react-redux";
+import Loader from "../Loader";
 
 class CommentList extends Component {
 
@@ -15,12 +16,20 @@ class CommentList extends Component {
 
         // from connect
         comments: PropTypes.array,
-        setComment: PropTypes.func.isRequired
+        setComment: PropTypes.func.isRequired,
+        loadCommits: PropTypes.func.isRequired
     };
 
     static defaultProps = {
         comments: []
     };
+
+    componentDidMount(){
+        const {loaded, loading, loadCommits} = this.props;
+        if (loading || !loaded) {
+            loadCommits();
+        }
+    }
 
     render() {
         const {isOpen, toggleOpen, articleId} = this.props;
@@ -63,4 +72,4 @@ class CommentList extends Component {
 }
 
 export default connect( ({comments}) => ({comments: Object.values(comments)})
-    , {setComment})(toggleOpen(CommentList));
+    , {setComment, loadCommits})(toggleOpen(CommentList));
