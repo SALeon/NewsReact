@@ -72,7 +72,7 @@ export function loadArticle (id) {
 
 export function loadCommits (article) {
     return (dispatch) => {
-        dispatch ({
+        dispatch({
             type: LOAD_COMMENTS + START,
             payload: {article}
         });
