@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently \"npm run dev\" \"npm run api\"",
     "dev": "webpack-dev-server --mode development --hot --inline ",
-    "api": "node simple_api/server.js",
+    "api": "node --inspect simple_api/server.js",
     "build": "webpack --mode production"
   },
   "author": "Siarhei_Leanvets",
