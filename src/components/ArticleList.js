@@ -23,7 +23,6 @@ class ArticleList extends Component {
       if (!loaded || !loading) {
           loadAllArticles();
       }
-
    }
 
     render() {
