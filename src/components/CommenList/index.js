@@ -4,7 +4,7 @@ import toggleOpen from '../../decorators/toggleOpen';
 import '../CommentForm/style.css'
 import CommentForm from "../CommentForm";
 import PropTypes from 'prop-types';
-import {setComment} from "../../AC";
+import {setComment, loadCommits} from "../../AC";
 import {connect} from "react-redux";
 
 class CommentList extends Component {
@@ -33,6 +33,10 @@ class CommentList extends Component {
                 <CommentForm addComment = {this. addComment(articleId)}/>
             </div>
         );
+    }
+
+    componentWillReceiveProps({isOpen, loadCommits, articleId}) {
+
     }
 
     getBody() {

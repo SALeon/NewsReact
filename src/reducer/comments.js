@@ -23,9 +23,11 @@ export default (comments = defaultState, action) => {
     switch (type) {
 
         case LOAD_COMMENTS + START:
+            console.log('load_comments start.....')
             return ;
 
         case LOAD_COMMENTS + SUCCESS:
+            console.log('load_comments success.....')
             return ;
 
         case ADD_COMMENT:
