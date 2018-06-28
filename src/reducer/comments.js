@@ -18,7 +18,7 @@ const ReducerState = Record({
 const defaultState = new ReducerState();
 
 export default (comments = defaultState, action) => {
-    const {type, payload, generateId, response} = action;
+    const {type, payload, generateId} = action;
 
     switch (type) {
 
@@ -28,7 +28,7 @@ export default (comments = defaultState, action) => {
 
         case LOAD_COMMENTS + SUCCESS:
             return comments
-                .set('entities', arrToMap(response, CommentRecord))
+                .set('entities', arrToMap(payload.response, CommentRecord))
                 .set('loading', false)
                 .set('loaded', true);
 
