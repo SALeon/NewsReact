@@ -20,7 +20,7 @@ class CommentList extends Component {
         loading: PropTypes.bool.isRequired,
         loaded: PropTypes.bool.isRequired,
         setComment: PropTypes.func.isRequired,
-        loadCommits: PropTypes.func.isRequired
+        loadComments: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -28,9 +28,9 @@ class CommentList extends Component {
     };
 
     componentDidMount() {
-        const {loaded, loading, loadCommits, articleId} = this.props;
+        const {loaded, loading, loadComments, articleId} = this.props;
         if (!loaded || !loading) {
-            loadCommits(articleId);
+            loadComments(articleId);
         }
     }
 
@@ -47,8 +47,10 @@ class CommentList extends Component {
         );
     }
 
-    componentWillReceiveProps({isOpen, loadCommits, articleId}) {
+    componentWillReceiveProps({isOpen, loadComments, articleId}) {
+        if (!this.props.isOpen && isOpen && !article){
 
+        }
     }
 
     getBody() {
@@ -80,4 +82,4 @@ export default connect(({comments}) =>
             loaded: comments.loaded,
             loading: comments.loading
         })
-    , {setComment, loadCommits: loadComments})(toggleOpen(CommentList));
+    , {setComment, loadComments})(toggleOpen(CommentList));
