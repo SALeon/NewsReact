@@ -50,6 +50,14 @@ export function loadAllArticles () {
     }
 }
 
+export function loadComments (articleId) {
+    return {
+        type: LOAD_COMMENTS,
+        payload: {articleId},
+        callAPI: `/api/comment?article=${articleId}`
+    }
+}
+
 export function loadArticle (id) {
     return (dispatch) => {
         dispatch({
@@ -66,26 +74,6 @@ export function loadArticle (id) {
             .catch(error => dispatch({
                 type: LOAD_ARTICLE + FAIL,
                 payload: {id, error}
-            }))
-    }
-}
-
-export function loadComments (article) {
-    return (dispatch) => {
-        dispatch({
-            type: LOAD_COMMENTS + START,
-            payload: {article}
-        });
-
-        fetch(`/api/comment?article=${article}`)
-            .then(res => res.json())
-            .then(response => dispatch({
-                type: LOAD_COMMENTS + SUCCESS,
-                payload: {article, response}
-            }))
-            .catch(error => dispatch({
-                type: LOAD_COMMENTS + FAIL,
-                payload: {article, error}
             }))
     }
 }
