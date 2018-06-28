@@ -70,7 +70,7 @@ export function loadArticle (id) {
     }
 }
 
-export function loadCommits (article) {
+export function loadComments (article) {
     return (dispatch) => {
         dispatch({
             type: LOAD_COMMENTS + START,

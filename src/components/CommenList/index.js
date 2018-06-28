@@ -4,7 +4,7 @@ import toggleOpen from '../../decorators/toggleOpen';
 import '../CommentForm/style.css'
 import CommentForm from "../CommentForm";
 import PropTypes from 'prop-types';
-import {setComment, loadCommits} from "../../AC";
+import {setComment, loadComments} from "../../AC";
 import {connect} from "react-redux";
 import Loader from "../Loader";
 import {mapToArr} from "../../helpers";
@@ -80,4 +80,4 @@ export default connect(({comments}) =>
             loaded: comments.loaded,
             loading: comments.loading
         })
-    , {setComment, loadCommits})(toggleOpen(CommentList));
+    , {setComment, loadCommits: loadComments})(toggleOpen(CommentList));
