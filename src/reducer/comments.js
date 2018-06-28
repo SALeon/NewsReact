@@ -1,5 +1,5 @@
 import {normalizedComments as defaultComments} from '../fixtures';
-import {ADD_COMMENT, LOAD_COMMENTS,START ,SUCCESS} from "../constants";
+import {ADD_COMMENT, LOAD_COMMENTS,SUCCESS} from "../constants";
 import {arrToMap} from "../helpers";
 import {Record, OrderedMap} from 'immutable';
 
@@ -10,36 +10,20 @@ const CommentRecord = Record({
 });
 
 const ReducerState = Record({
-    loading: false,
-    loaded: false,
     entities: new OrderedMap({})
 });
 
 const defaultState = new ReducerState();
 
 export default (comments = defaultState, action) => {
-    const {type, payload, generateId} = action;
+    const {type, payload, generateId, response} = action;
 
     switch (type) {
-
-        case LOAD_COMMENTS + START:
-            return comments
-                .set('loading', true);
-
         case LOAD_COMMENTS + SUCCESS:
-            return comments
-                .set('entities', arrToMap(payload.response, CommentRecord))
-                .set('loading', false)
-                .set('loaded', true);
+            return comments.update('entities', entities => entities.merge(arrToMap(response, CommentRecord)));
 
         case ADD_COMMENT:
-            return {
-                ...comments,
-                [generateId]: {
-                    ...payload.comment,
-                    'id': generateId
-                }
-            };
+            return comments.setIn(['entities', generateId], new CommentRecord({...payload.comment, id: generateId}));
     }
 
     return comments;
