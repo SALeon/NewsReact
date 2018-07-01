@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './style.css';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {setComment} from '../../AC/index'
 
 const limits = {
     user: {
@@ -17,10 +19,13 @@ const limits = {
 const DEFAULT_USER_TEXT = 'set user name';
 const DEFAULT_COMMENT_TEXT = 'set comment text';
 
-export default class CommentForm extends Component {
+class CommentForm extends Component {
 
     static propTypes = {
-        // from props
+        //from props
+        articleId: PropTypes.string.isRequired,
+
+        // from connect
         addComment: PropTypes.func.isRequired
     };
 
@@ -85,3 +90,6 @@ export default class CommentForm extends Component {
     }
 }
 
+export default connect(null, (dispatch, ownProps) => ({
+    addComment: (comment) => dispatch(setComment(comment, ownProps.articleId))
+}))(CommentForm);

@@ -35,7 +35,7 @@ export default (articleState = defaultState, action) => {
     switch (type) {
         case ADD_COMMENT:
             return articleState.updateIn(
-                ['entities', payload.articleId, 'comment'],
+                ['entities', payload.articleId, 'comments'],
                 comments => comments.concat(generateId)
             );
 
