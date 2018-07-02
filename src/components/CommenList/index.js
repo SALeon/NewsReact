@@ -13,8 +13,8 @@ class CommentList extends Component {
     static propTypes = {
         // from props
         article: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
+            id: PropTypes.string,
+            title: PropTypes.string,
             text: PropTypes.string
         }).isRequired,
         isOpen: PropTypes.bool.isRequired,

@@ -21,20 +21,23 @@ import {connect} from 'react-redux';
 
 class Article extends Component {
     static propTypes = {
+        id: PropTypes.string.isRequired,
+        //from connect
         article: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
+            id: PropTypes.string,
+            title: PropTypes.string,
             text: PropTypes.string
-        }).isRequired
+        })
     };
 
 
     render() {
-        const {article, isView, click} = this.props;
+        const {article, isView} = this.props;
+        if (!article) {return null}
         return (
             <div>
                 <h3>{article.title}</h3>
-                <button onClick={click(article.id)}>
+                <button >
                     {isView ? 'close' : 'open'}
                 </button>
                 <button onClick = {this.handleDelete}>delete me</button>
@@ -52,9 +55,10 @@ class Article extends Component {
         )
     }
 
-    componentWillReceiveProps({isView, loadArticle, article}) {
-        if (isView && !article.text && !article.loading) {
-            loadArticle(article.id);
+    componentDidMount() {
+        const {loadArticle, article, id} = this.props;
+         if (!article || (!article.text && !article.loading)) {
+            loadArticle(id);
         }
     }
 
@@ -76,4 +80,6 @@ class Article extends Component {
     }
 }
 
-export default connect(null, {deleteArticle, loadArticle})(Article);
+export default connect((state, ownProps) => ({
+  article: state.articles.entities.get(ownProps.id)
+}), {deleteArticle, loadArticle})(Article);
