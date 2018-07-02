@@ -9,6 +9,7 @@ module.exports = {
     devtool: 'source-map',
     entry: ['./src/index.js'],
     devServer: {
+        historyApiFallback: true,
         proxy: [{
             path: '/api/',
             target: 'http://localhost:3001'
