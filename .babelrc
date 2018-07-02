@@ -1,3 +1,8 @@
 {
-  "presets": ["env", "react", "stage-0", "react-hmre"]
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "@babel/preset-es2015",
+    ["@babel/preset-stage-0",{ "decoratorsLegacy": true }]
+  ]
 }
