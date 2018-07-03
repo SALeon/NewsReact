@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ArticleList from '../ArticleList';
 import Article from '../Artcile'
-import {Route} from "react-router-dom";
+import {Route} from 'react-router-dom';
 
 class Articles extends Component {
     static propTypes = {};
