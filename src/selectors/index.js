@@ -16,7 +16,6 @@ export const filtratedArticlesSelector = createSelector(articlesGetter, filtersG
     });
 });
 
-
 export const commentSelectorFactory = () =>
     createSelector(commentGetter, idGetter, (comments, id) => {
         return comments.get(id);

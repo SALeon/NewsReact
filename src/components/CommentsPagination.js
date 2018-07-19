@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {loadAllComments} from '../AC';
-import {arrToMap, mapToArr} from "../helpers";
 import Loader from "./Loader";
 import Comment from "./Comment";
 
@@ -39,14 +38,12 @@ class CommentsPagination extends Component {
             {commentIds.map(id => (<li key ={id}><Comment id ={id}/></li>))}
         </ul>)
     };
-
 }
-
 
 export default connect((state) => {
     const {pagination} = state.comments;
-        return {
-    commentIds: pagination.getIn(['ids']),
-    loading: pagination.getIn(['loading'])
-}
+    return {
+        commentIds: pagination.getIn(['ids']),
+        loading: pagination.getIn(['loading'])
+    }
 }, {loadAllComments})(CommentsPagination);
