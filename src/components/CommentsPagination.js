@@ -4,10 +4,12 @@ import {connect} from 'react-redux';
 import {loadAllComments} from '../AC';
 import Loader from "./Loader";
 import Comment from "./Comment";
+import {NavLink} from "react-router-dom";
 
 class CommentsPagination extends Component {
     static propTypes = {
         //from connect
+        total: PropTypes.number,
         commentIds: PropTypes.array,
         loadAllComments: PropTypes.func,
         loading: PropTypes.bool
@@ -18,7 +20,10 @@ class CommentsPagination extends Component {
         if (!commentIds || !commentIds.length) {
             return (<Loader/>);
         }
-        return (this.getComments());
+        return (<>
+            {this.getComments()}
+            {this.getPaginator()}
+        </>)
     }
 
     componentWillMount () {
@@ -38,11 +43,21 @@ class CommentsPagination extends Component {
             {commentIds.map(id => (<li key ={id}><Comment id ={id}/></li>))}
         </ul>)
     };
+
+    getPaginator = () => {
+        const {total} = this.props;
+        let items = [];
+        for (let i = 1; i <= Math.floor((total - 1) / 5 ) + 1; i++) {
+            items.push(<li key = {i}><NavLink to = {`/comments/${i}`} activeStyle = {{color: 'red'}}>{i}</NavLink> </li>);
+        }
+        return <ul>{items}</ul>;
+    };
 }
 
 export default connect((state) => {
-    const {pagination} = state.comments;
+    const {pagination, total} = state.comments;
     return {
+        total,
         commentIds: pagination.getIn(['ids']),
         loading: pagination.getIn(['loading'])
     }
