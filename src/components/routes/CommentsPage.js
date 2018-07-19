@@ -1,21 +1,30 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Route} from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 import CommentsPagination from '../CommentsPagination';
 
 class CommentsPage extends Component {
-    static propTypes = {};
+    static propTypes = {
+        match : PropTypes.object.isRequired
+    };
 
     render () {
-        return (
-            <>
-                <Route path = '/comments' render = {this.getComments}/>
-            </>
-        )
+        const {isExact} = this.props.match;
+
+        if (isExact) {
+            return (<>
+                        <Redirect to = '/comments/1'/>
+                    </>);
+        }
+
+        return( <>
+                    <Route path = '/comments/:page' render = {this.getComments} />
+                </>);
     }
 
-    getComments = () => {
-        return <CommentsPagination/>
+    getComments = ({match}) => {
+        console.log(match);
+        return <CommentsPagination page = {match.params.page}/>
     };
 
 }

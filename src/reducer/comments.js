@@ -34,8 +34,8 @@ export default (commentsState = defaultState, action) => {
             return commentsState
                 .set('total', response.total)
                 .mergeIn(['entities'], arrToMap(response.records, CommentRecord))
-                .setIn(['pagination', 'ids'],  response.records.map(comment => comment.id))
-                .setIn(['pagination', 'loading'], false)
+                .setIn(['pagination',payload.page , 'ids'],  response.records.map(comment => comment.id))
+                .setIn(['pagination',payload.page , 'loading'], false)
     }
 
     return commentsState;

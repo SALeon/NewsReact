@@ -85,6 +85,21 @@ export function loadArticle (id) {
     }
 }
 
+export function checkAndLoadCommentsForPage(page) {
+    return (dispatch, getState) => {
+        const {comments: {pagination}} = getState();
+        if (pagination.getIn([page,'loading']) || pagination.getIn([page, 'ids'])) {
+            return;
+        }
+
+        dispatch({
+            type: LOAD_COMMENTS_PAGE,
+            payload: {page},
+            callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
+        });
+    }
+}
+
 // export function loadArticle(id) {
 //     return{
 //         type: LOAD_ARTICLE,
