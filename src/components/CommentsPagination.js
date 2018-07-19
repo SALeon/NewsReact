@@ -20,10 +20,12 @@ class CommentsPagination extends Component {
         if (!commentIds || !commentIds.length) {
             return (<Loader/>);
         }
-        return (<>
-            {this.getComments()}
-            {this.getPaginator()}
-        </>)
+        return (
+            <>
+                {this.getComments()}
+                {this.getPaginator()}
+            </>
+        )
     }
 
     componentWillMount () {
