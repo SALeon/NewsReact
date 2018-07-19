@@ -11,30 +11,32 @@ const CommentRecord = Record({
 
 const ReducerState = Record({
     entities: new OrderedMap({}),
-    pagination: new Map({})
+    pagination: new Map({}),
+    total: null
 });
 
 const defaultState = new ReducerState();
 
-export default (comments = defaultState, action) => {
+export default (commentsState = defaultState, action) => {
     const {type, payload, generateId, response} = action;
 
     switch (type) {
         case LOAD_COMMENTS + SUCCESS:
-            return comments.update('entities', entities => entities.merge(arrToMap(response, CommentRecord)));
+            return commentsState.update('entities', entities => entities.merge(arrToMap(response, CommentRecord)));
 
         case ADD_COMMENT:
-            return comments.setIn(['entities', generateId], new CommentRecord({...payload.comment, id: generateId}));
+            return commentsState.setIn(['entities', generateId], new CommentRecord({...payload.comment, id: generateId}));
 
         case LOAD_COMMENTS_PAGE + START:
-            return comments.setIn(['pagination','loading'],true);
+            return commentsState.setIn(['pagination','loading'],true);
 
         case LOAD_COMMENTS_PAGE + SUCCESS:
-            return comments
+            return commentsState
+                .set('total', response.total)
                 .mergeIn(['entities'], arrToMap(response.records, CommentRecord))
                 .setIn(['pagination', 'ids'],  response.records.map(comment => comment.id))
                 .setIn(['pagination', 'loading'], false)
     }
 
-    return comments;
+    return commentsState;
 }
