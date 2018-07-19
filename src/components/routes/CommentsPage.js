@@ -17,13 +17,12 @@ class CommentsPage extends Component {
                     </>);
         }
 
-        return( <>
-                    <Route path = '/comments/:page' render = {this.getComments} />
-                </>);
+        return(<>
+                   <Route path = '/comments/:page' render = {this.getComments} />
+               </>);
     }
 
     getComments = ({match}) => {
-        console.log(match);
         return <CommentsPagination page = {match.params.page}/>
     };
 
