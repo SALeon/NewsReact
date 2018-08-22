@@ -2,16 +2,18 @@ import React, {Component} from 'react';
 import Articles from './routes/Articles';
 import Filters from './Filters';
 import Counter from './Counter';
-import {BrowserRouter as Router, Switch ,Route, NavLink} from 'react-router-dom';
+import {Switch, Route, NavLink} from 'react-router-dom';
+import {ConnectedRouter} from 'react-router-redux';
 import NewArticle from './routes/NewArticle';
 import NotFound from './routes/NotFound';
 import CommentsPage from './routes/CommentsPage';
+import history from '../history';
 
 export default class App extends Component {
 
     render () {
         return (
-            <Router>
+            <ConnectedRouter history = {history} >
                 <>
                     <>
                         <h2>Main menu</h2>
@@ -29,7 +31,7 @@ export default class App extends Component {
                         <Route path = '*' component = {NotFound}/>
                     </Switch>
                 </>
-            </Router>
+            </ConnectedRouter>
         )
     }
 
